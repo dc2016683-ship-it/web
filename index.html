@@ -1,98 +1,144 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Veskard Live View</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Os - Stream Status</title>
     <style>
+        /* Estilo general estilo Cyberpunk */
         body {
             background-color: #050505;
-            color: #00f3ff;
-            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
+            min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            gap: 20px;
         }
 
-        .monitor-container {
+        .container {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             justify-content: center;
-            width: 100%;
         }
 
-        .panel {
+        .card {
             background: #111;
-            border: 2px solid #00f3ff;
+            border: 2px solid #222;
             border-radius: 20px;
-            overflow: hidden;
-            width: 450px;
-            height: 600px;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .panel-header {
-            padding: 10px;
+            width: 300px;
+            padding: 30px;
             text-align: center;
-            background: #1a1a1a;
-            border-bottom: 1px solid #333;
-            font-weight: bold;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto Glow al pasar el mouse */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .platform-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            font-size: 0.8rem;
         }
 
-        /* El cuadro que muestra tu perfil real */
-        .live-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #000;
+        /* Indicador de Estado */
+        .status {
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 6px 15px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
-        .kick-border { border-color: #53fc18; box-shadow: 0 0 20px rgba(83, 252, 24, 0.2); }
+        .offline {
+            background: #222;
+            color: #777;
+            border: 1px solid #444;
+        }
+
+        /* Estilos específicos por plataforma */
+        .youtube-card { border-color: #ff0000; }
+        .youtube-card:hover { box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); }
+        .yt-text { color: #ff0000; }
+
+        .kick-card { border-color: #53fc18; }
+        .kick-card:hover { box-shadow: 0 0 30px rgba(83, 252, 24, 0.3); }
         .kick-text { color: #53fc18; }
 
-        h1 {
-            text-shadow: 0 0 10px #00f3ff;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
+        .twitch-card { border-color: #9146FF; }
+        .twitch-card:hover { box-shadow: 0 0 30px rgba(145, 70, 255, 0.3); }
+        .tw-text { color: #9146FF; }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ddd;
+            transform: scale(1.05);
+        }
+
+        .link-preview {
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 10px;
+            display: block;
+            word-break: break-all;
         }
     </style>
 </head>
 <body>
 
-    <h1>STREAM MONITOR SYSTEM</h1>
-
-    <div class="monitor-container">
+    <div class="container">
         
-        <!-- PANEL DE TWITCH -->
-        <div class="panel">
-            <div class="panel-header">Twitch: king_os12857</div>
-            <!-- Cargamos el perfil móvil para que se vea mejor en el cuadro -->
-            <iframe 
-                src="https://m.twitch.tv/king_os12857" 
-                class="live-frame">
-            </iframe>
+        <!-- Tarjeta YouTube -->
+        <div class="card youtube-card">
+            <div class="status offline">DESCONECTADO</div>
+            <div class="platform-name yt-text">YouTube</div>
+            <p>King_Os1207</p>
+            <a href="https://www.youtube.com/@King_Os1207" target="_blank" class="btn">VER CANAL</a>
+            <span class="link-preview">youtube.com/@King_Os1207</span>
         </div>
 
-        <!-- PANEL DE KICK -->
-        <div class="panel kick-border">
-            <div class="panel-header kick-text">Kick: king-os-1234</div>
-            <iframe 
-                src="https://kick.com/king-os-1234" 
-                class="live-frame">
-            </iframe>
+        <!-- Tarjeta Kick -->
+        <div class="card kick-card">
+            <div class="status offline">DESCONECTADO</div>
+            <div class="platform-name kick-text">Kick</div>
+            <p>king-os-1234</p>
+            <a href="https://kick.com/king-os-1234" target="_blank" class="btn">VER CANAL</a>
+            <span class="link-preview">kick.com/king-os-1234</span>
+        </div>
+
+        <!-- Tarjeta Twitch -->
+        <div class="card twitch-card">
+            <div class="status offline">DESCONECTADO</div>
+            <div class="platform-name tw-text">Twitch</div>
+            <p>KING_OS_1234</p>
+            <a href="https://kick.com/king-os-1234" target="_blank" class="btn">VER CANAL</a>
+            <span class="link-preview">kick.com/king-os-1234</span>
         </div>
 
     </div>
-
-    <p style="color: #444; font-size: 0.7rem; margin-top: 20px;">
-        Nota: Si Twitch dice "Refused", es porque necesitas abrir este archivo desde un servidor (GitHub Pages).
-    </p>
 
 </body>
 </html>
