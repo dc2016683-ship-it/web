@@ -45,23 +45,23 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-        }
+       }
        .card:hover { transform: translateY(-10px); box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
        .platform-name { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; text-transform: uppercase; }
        .status {
             font-size: 0.85rem; font-weight: bold; padding: 6px 15px;
             border-radius: 50px; display: inline-block; margin-bottom: 20px; letter-spacing: 1px;
-        }
+       }
        .offline { background: #222; color: #777; border: 1px solid #444; }
        .live {
             background: #ff0000; color: #fff; border: 1px solid #ff4444;
             animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
+       }
+       @keyframes pulse {
             0% { box-shadow: 0 0 rgba(255, 0, 0, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
             100% { box-shadow: 0 0 rgba(255, 0, 0, 0); }
-        }
+       }
        .youtube-card { border-color: #ff0000; }
        .youtube-card:hover { box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); }
        .yt-text { color: #ff0000; }
@@ -77,7 +77,7 @@
             display: inline-block; margin-top: 15px; padding: 12px 25px;
             background: #fff; color: #000; text-decoration: none;
             border-radius: 10px; font-weight: bold; transition: 0.3s;
-        }
+       }
        .btn:hover { background: #ddd; transform: scale(1.05); }
        .link-preview { font-size: 0.8rem; color: #555; margin-top: 10px; display: block; word-break: break-all; }
        .viewers { font-size: 0.9rem; margin-top: 8px; color: #aaa; }
@@ -99,28 +99,28 @@
         <div class="card kick-card" id="kick-card">
             <div class="status offline" id="kick-status">CHEQUA SI VESKARD ESTA EN LIVE</div>
             <div class="platform-name kick-text">Kick</div>
-            <p>king-os-1234</p>
+            <p>KING_OS1234</p>
             <div class="viewers" id="kick-viewers"></div>
-            <a href="https://kick.com/king-os-1234" target="_blank" class="btn">VER CANAL</a>
-            <span class="link-preview">kick.com/king-os-1234</span>
+            <a href="https://kick.com/KING_OS1234" target="_blank" class="btn">VER CANAL</a>
+            <span class="link-preview">kick.com/KING_OS1234</span>
         </div>
 
         <!-- Tarjeta Twitch -->
         <div class="card twitch-card" id="twitch-card">
             <div class="status offline" id="twitch-status">CHEQUA SI VESKARD ESTA EN LIVE</div>
             <div class="platform-name tw-text">Twitch</div>
-            <p>KING_OS_1234</p>
+            <p>king_os_new</p>
             <div class="viewers" id="twitch-viewers"></div>
-            <a href="https://twitch.tv/KING_OS_1234" target="_blank" class="btn">VER CANAL</a>
-            <span class="link-preview">twitch.tv/KING_OS_1234</span>
+            <a href="https://twitch.tv/king_os_new" target="_blank" class="btn">VER CANAL</a>
+            <span class="link-preview">twitch.tv/king_os_new</span>
         </div>
     </div>
 
 <script>
 const CONFIG = {
     youtube: { channelId: 'UCxxxxxxxxxxxxx', name: 'King_Os1207' },
-    kick: { username: 'king-os-1234' },
-    twitch: { username: 'KING_OS_1234' },
+    kick: { username: 'KING_OS1234' },
+    twitch: { username: 'king_os_new' },
     apiEndpoint: 'https://tu-api.com/check-stream'
 };
 
