@@ -7,7 +7,7 @@
     
     <!-- Open Graph para Discord, WhatsApp, Messenger -->
     <meta property="og:title" content="King Os - ¿Veskard está en Live?">
-    <meta property="og:description" content="Chequa si Veskard anda en live en YouTube, Kick o Twitch 🔴">
+    <meta property="og:description" content="Chequa si Veskard anda en live en YouTube, Kick, Twitch o TikTok 🔴">
     <meta property="og:image" content="https://i.postimg.cc/R6Z2zCLj/Screenshot-2026-05-04-204906.png">
     <meta property="og:url" content="https://tu-dominio.com">
     <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="King Os - ¿Veskard está en Live?">
-    <meta name="twitter:description" content="Chequa si Veskard anda en live en YouTube, Kick o Twitch 🔴">
+    <meta name="twitter:description" content="Chequa si Veskard anda en live en YouTube, Kick, Twitch o TikTok 🔴">
     <meta name="twitter:image" content="https://i.postimg.cc/R6Z2zCLj/Screenshot-2026-05-04-204906.png">
     
     <meta name="theme-color" content="#ff0000">
@@ -34,7 +34,7 @@
             margin: 0;
             gap: 20px;
         }
-       .container { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; }
+       .container { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; padding: 20px; }
        .card {
             background: #111;
             border: 2px solid #222;
@@ -65,14 +65,23 @@
        .youtube-card { border-color: #ff0000; }
        .youtube-card:hover { box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); }
        .yt-text { color: #ff0000; }
+       
        .kick-card { border-color: #53fc18; }
        .kick-card:hover { box-shadow: 0 0 30px rgba(83, 252, 24, 0.3); }
        .kick-text { color: #53fc18; }
        .kick-card.live { background: #53fc18; color: #000; border: 1px solid #53fc18; }
+       
        .twitch-card { border-color: #9146FF; }
        .twitch-card:hover { box-shadow: 0 0 30px rgba(145, 70, 255, 0.3); }
        .tw-text { color: #9146FF; }
        .twitch-card.live { background: #9146FF; border: 1px solid #9146FF; }
+
+       /* Nueva Tarjeta de TikTok */
+       .tiktok-card { border-color: #00f2fe; }
+       .tiktok-card:hover { box-shadow: 0 0 30px rgba(254, 44, 85, 0.4); }
+       .tt-text { color: #fe2c55; }
+       .tiktok-card.live { background: #fe2c55; border: 1px solid #fe2c55; }
+
        .btn {
             display: inline-block; margin-top: 15px; padding: 12px 25px;
             background: #fff; color: #000; text-decoration: none;
@@ -114,6 +123,16 @@
             <a href="https://twitch.tv/king_os_new" target="_blank" class="btn">VER CANAL</a>
             <span class="link-preview">twitch.tv/king_os_new</span>
         </div>
+
+        <!-- Tarjeta TikTok -->
+        <div class="card tiktok-card" id="tiktok-card">
+            <div class="status offline" id="tiktok-status">CHEQUA SI VESKARD ESTA EN LIVE</div>
+            <div class="platform-name tt-text">TikTok</div>
+            <p>@king_0s112</p>
+            <div class="viewers" id="tiktok-viewers"></div>
+            <a href="https://www.tiktok.com/@king_0s112" target="_blank" class="btn">VER CANAL</a>
+            <span class="link-preview">tiktok.com/@king_0s112</span>
+        </div>
     </div>
 
 <script>
@@ -121,6 +140,7 @@ const CONFIG = {
     youtube: { channelId: 'UCxxxxxxxxxxxxx', name: 'King_Os1207' },
     kick: { username: 'KING_OS1234' },
     twitch: { username: 'king_os_new' },
+    tiktok: { username: 'king_0s112' },
     apiEndpoint: 'https://tu-api.com/check-stream'
 };
 
@@ -128,12 +148,14 @@ const OFFLINE_TEXT = "CHEQUA SI VESKARD ESTA EN LIVE";
 
 async function checkStreamStatus() {
     try {
-        const res = await fetch(`${CONFIG.apiEndpoint}?twitch=${CONFIG.twitch.username}&kick=${CONFIG.kick.username}&youtube=${CONFIG.youtube.channelId}`);
+        // Añadido el parámetro de TikTok a la petición de tu API externa
+        const res = await fetch(`${CONFIG.apiEndpoint}?twitch=${CONFIG.twitch.username}&kick=${CONFIG.kick.username}&youtube=${CONFIG.youtube.channelId}&tiktok=${CONFIG.tiktok.username}`);
         const data = await res.json();
 
+        // YouTube
         const ytStatus = document.getElementById('yt-status');
         const ytViewers = document.getElementById('yt-viewers');
-        if (data.youtube.live) {
+        if (data.youtube && data.youtube.live) {
             ytStatus.textContent = 'EN VIVO';
             ytStatus.className = 'status live';
             ytViewers.textContent = `${data.youtube.viewers} viewers`;
@@ -143,9 +165,10 @@ async function checkStreamStatus() {
             ytViewers.textContent = '';
         }
 
+        // Kick
         const kickStatus = document.getElementById('kick-status');
         const kickViewers = document.getElementById('kick-viewers');
-        if (data.kick.live) {
+        if (data.kick && data.kick.live) {
             kickStatus.textContent = 'EN VIVO';
             kickStatus.className = 'status live';
             kickViewers.textContent = `${data.kick.viewers} viewers`;
@@ -155,9 +178,10 @@ async function checkStreamStatus() {
             kickViewers.textContent = '';
         }
 
+        // Twitch
         const twitchStatus = document.getElementById('twitch-status');
         const twitchViewers = document.getElementById('twitch-viewers');
-        if (data.twitch.live) {
+        if (data.twitch && data.twitch.live) {
             twitchStatus.textContent = 'EN VIVO';
             twitchStatus.className = 'status live';
             twitchViewers.textContent = `${data.twitch.viewers} viewers`;
@@ -165,6 +189,19 @@ async function checkStreamStatus() {
             twitchStatus.textContent = OFFLINE_TEXT;
             twitchStatus.className = 'status offline';
             twitchViewers.textContent = '';
+        }
+
+        // TikTok
+        const tiktokStatus = document.getElementById('tiktok-status');
+        const tiktokViewers = document.getElementById('tiktok-viewers');
+        if (data.tiktok && data.tiktok.live) {
+            tiktokStatus.textContent = 'EN VIVO';
+            tiktokStatus.className = 'status live';
+            tiktokViewers.textContent = `${data.tiktok.viewers} viewers`;
+        } else {
+            tiktokStatus.textContent = OFFLINE_TEXT;
+            tiktokStatus.className = 'status offline';
+            tiktokViewers.textContent = '';
         }
     } catch (e) {
         console.error('Error checando streams:', e);
